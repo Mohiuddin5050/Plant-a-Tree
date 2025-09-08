@@ -33,7 +33,16 @@ const showCart = () => {
     })
     cartPrice.innerText=`Total: ৳${total}`
 }
-// <!-- <i class="fa-solid fa-xmark"></i> -->
+const manageSpinner=(status)=>{
+    if(status==true){
+        document.getElementById("spinner").classList.remove("hidden");
+        document.getElementById("tree-container").classList.add("hidden");
+    }else{
+         document.getElementById("tree-container").classList.remove("hidden");
+        document.getElementById("spinner").classList.add("hidden");
+    }
+}
+
 const allTrees = () => {
     fetch("https://openapi.programming-hero.com/api/plants")
         .then(res => res.json())
@@ -66,6 +75,7 @@ const removeActive = () => {
 }
 
 const loadPlants = (id) => {
+    manageSpinner(true);
     const url = (`https://openapi.programming-hero.com/api/category/${id}`)
     fetch(url)
         .then(res => res.json())
@@ -94,6 +104,7 @@ const showPlants = (plants) => {
                     </div>`
         plantsCard.append(card);
     })
+    manageSpinner(false);
 }
 
 const loadDetail = (id) => {
