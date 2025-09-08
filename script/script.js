@@ -46,7 +46,7 @@ const showAllTrees = (trees) => {
         const card = document.createElement("div")
         card.innerHTML = `
          <div class="bg-white p-3 rounded-xl space-y-3 flex flex-col h-full">
-                        <img class="h-40 w-full rounded-xl" src="${tree.image}" alt="">
+                        <img class="h-40 w-full rounded-xl object-cover" src="${tree.image}" alt="">
                         <h2 class="font-bold text-xl "><span onclick="loadDetail(${tree.id})" class="cursor-pointer ">${tree.name}</span></h2>
                         <p class="flex-grow">${tree.description}</p>
                         <div class="flex justify-between">
@@ -83,7 +83,7 @@ const showPlants = (plants) => {
         const card = document.createElement("div")
         card.innerHTML = `
          <div class="bg-white p-3 rounded-xl space-y-3 flex flex-col h-full">
-                        <img class="h-40 w-full rounded-xl" src="${tree.image}" alt="">
+                        <img class="h-40 w-full rounded-xl object-cover" src="${tree.image}" alt="">
                        <h2 class="font-bold text-xl "><span onclick="loadDetail(${tree.id})" class="cursor-pointer ">${tree.name}</span></h2>
                         <p class="flex-grow">${tree.description}</p>
                         <div class="flex justify-between">
