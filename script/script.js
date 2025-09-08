@@ -9,15 +9,15 @@ const showAllTrees = (trees) => {
     trees.forEach(tree => {
         const card = document.createElement("div")
         card.innerHTML = `
-         <div class="bg-white p-2 rounded-xl space-y-3 h-full">
-                        <img class="h-80 w-full rounded-xl" src="${tree.image}" alt="">
+         <div class="bg-white p-3 rounded-xl space-y-3 flex flex-col h-full">
+                        <img class="h-40 w-full rounded-xl" src="${tree.image}" alt="">
                         <h2 onclick="loadDetail(${tree.id})" class="font-bold text-xl cursor-pointer inline-block">${tree.name}</h2>
-                        <p>${tree.description}</p>
+                        <p class="flex-grow">${tree.description}</p>
                         <div class="flex justify-between">
                             <button class="bg-[#DCFCE7] text-green-700 font-medium rounded-3xl px-3 py-1">${tree.category}</button>
                             <h2 class="font-bold">$${tree.price}</h2>
                         </div>
-                        <button class="btn btn-active btn-success w-full  rounded-3xl">Success</button>
+                        <button class="btn btn-active btn-success w-full  rounded-3xl mt-auto">Success</button>
                     </div>`
         treeContainer.append(card);
     })
@@ -25,7 +25,7 @@ const showAllTrees = (trees) => {
 allTrees()
 
 const removeActive = () => {
-    const categoryLi= document.querySelectorAll(".category-li")
+    const categoryLi = document.querySelectorAll(".category-li")
     categoryLi.forEach(li => li.classList.remove("active"))
 }
 
@@ -35,7 +35,7 @@ const loadPlants = (id) => {
         .then(res => res.json())
         .then(data => {
             removeActive()
-            const liList=document.getElementById(`li-list-${id}`)
+            const liList = document.getElementById(`li-list-${id}`)
             liList.classList.add("active")
             showPlants(data.plants)
         })
@@ -46,15 +46,15 @@ const showPlants = (plants) => {
     plants.forEach(tree => {
         const card = document.createElement("div")
         card.innerHTML = `
-         <div class="bg-white p-2 rounded-xl space-y-3 h-full">
-                        <img class="h-80 w-full rounded-xl" src="${tree.image}" alt="">
+         <div class="bg-white p-3 rounded-xl space-y-3 flex flex-col h-full">
+                        <img class="h-40 w-full rounded-xl" src="${tree.image}" alt="">
                         <h2 onclick="loadDetail(${tree.id})" class="font-bold text-xl cursor-pointer inline-block">${tree.name}</h2>
-                        <p>${tree.description}</p>
+                        <p class="flex-grow">${tree.description}</p>
                         <div class="flex justify-between">
                             <button class="bg-[#DCFCE7] text-green-700 font-medium rounded-3xl px-3 py-1">${tree.category}</button>
                             <h2 class="font-bold">$${tree.price}</h2>
                         </div>
-                        <button class="btn btn-active btn-success w-full  rounded-3xl">Success</button>
+                        <button class="btn btn-active btn-success w-full  rounded-3xl mt-auto">Success</button>
                     </div>`
         plantsCard.append(card);
     })
@@ -69,7 +69,7 @@ const showDetail = (plants) => {
     const detailsContainer = document.getElementById("details-container")
     detailsContainer.innerHTML = `
     <h2 class="font-bold text-2xl">${plants.name}</h2>
-                    <img class="rounded-xl h-70 w-full" src="${plants.image}" alt="">
+                    <img class="rounded-xl h-64 w-full" src="${plants.image}" alt="">
                     <p><span class="font-bold">Category: </span>${plants.category} </p>
                     <h2><span class="font-bold">Price:</span> $${plants.price}</h2>
                     <p><span class="font-bold">Description: </span>${plants.description}</p>
@@ -92,15 +92,6 @@ const displayCategories = (categories) => {
 
         categoriesContainer.append(div);
     })
-    // categoriesContainer.addEventListener("click", (e) => {
-    //     const allLi = document.querySelectorAll("li")
-    //     allLi.forEach(li => {
-    //         li.classList.remove("active")
-    //     })
-    //     if (e.target.tagName === "li")
-    //         e.target.classList.add("active")
-    //     console.log(e.target);
-    // })
 }
 
 loadCategories()
