@@ -24,11 +24,21 @@ const showAllTrees = (trees) => {
 }
 allTrees()
 
+const removeActive = () => {
+    const categoryLi= document.querySelectorAll(".category-li")
+    categoryLi.forEach(li => li.classList.remove("active"))
+}
+
 const loadPlants = (id) => {
     const url = (`https://openapi.programming-hero.com/api/category/${id}`)
     fetch(url)
         .then(res => res.json())
-        .then(data => showPlants(data.plants))
+        .then(data => {
+            removeActive()
+            const liList=document.getElementById(`li-list-${id}`)
+            liList.classList.add("active")
+            showPlants(data.plants)
+        })
 }
 const showPlants = (plants) => {
     const plantsCard = document.getElementById("tree-container");
@@ -58,13 +68,13 @@ const loadDetail = (id) => {
 const showDetail = (plants) => {
     const detailsContainer = document.getElementById("details-container")
     detailsContainer.innerHTML = `
-    <h2 class="font-bold text-xl">${plants.name}</h2>
-    <img class="rounded-xl" src="" alt="${plants.image}">
-    <p><span class="font-bold">Category: </span>${plants.category} </p>
-    <h2><span class="font-bold">Price:</span> $${plants.price}</h2>
-    <p><span class="font-bold">Description: </span>${plants.description}</p>
-`
-document.getElementById("my_modal_5").showModal();
+    <h2 class="font-bold text-2xl">${plants.name}</h2>
+                    <img class="rounded-xl h-70 w-full" src="${plants.image}" alt="">
+                    <p><span class="font-bold">Category: </span>${plants.category} </p>
+                    <h2><span class="font-bold">Price:</span> $${plants.price}</h2>
+                    <p><span class="font-bold">Description: </span>${plants.description}</p>
+                </div>`
+    document.getElementById("my_modal_5").showModal();
 }
 
 const loadCategories = () => {
@@ -78,20 +88,19 @@ const displayCategories = (categories) => {
     categories.forEach(category => {
         const div = document.createElement("ul")
         div.innerHTML = `
-         <li onclick="loadPlants(${category.id})" class="cursor-pointer hover:bg-green-800 hover:text-white py-1 rounded-md px-2">${category.category_name}</li>`
+         <li id="li-list-${category.id}" onclick="loadPlants(${category.id})" class="cursor-pointer hover:bg-green-800 hover:text-white py-1 rounded-md px-2 category-li">${category.category_name}</li>`
 
         categoriesContainer.append(div);
     })
-    categoriesContainer.addEventListener("click", (e) => {
-        // console.log(e.target);
-        const allLi = document.querySelectorAll("li")
-        allLi.forEach(li => {
-            li.classList.remove("active")
-        })
-        if (e.target.localName === "li")
-            e.target.classList.add("active")
-
-    })
+    // categoriesContainer.addEventListener("click", (e) => {
+    //     const allLi = document.querySelectorAll("li")
+    //     allLi.forEach(li => {
+    //         li.classList.remove("active")
+    //     })
+    //     if (e.target.tagName === "li")
+    //         e.target.classList.add("active")
+    //     console.log(e.target);
+    // })
 }
 
 loadCategories()
