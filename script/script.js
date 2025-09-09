@@ -44,6 +44,7 @@ const manageSpinner=(status)=>{
 }
 
 const allTrees = () => {
+    manageSpinner(true);
     fetch("https://openapi.programming-hero.com/api/plants")
         .then(res => res.json())
         .then(data => showAllTrees(data.plants))
@@ -66,6 +67,7 @@ const showAllTrees = (trees) => {
                     </div>`
         treeContainer.append(card);
     })
+    manageSpinner(false)
 }
 allTrees()
 
